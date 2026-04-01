@@ -1,13 +1,118 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
+// prisma/schema.prisma
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  photo     String?
+  about     String? 
+  createdAt DateTime @default(now())
+
+  memberships        Membership[]
+  projectMemberships ProjectMembership[]
+  taskAssignments    TaskAssignment[]
+}
+
+model Organization {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  photo       String?
+  createdAt   DateTime @default(now())
+
+  memberships Membership[]
+  projects    Project[]
+}
+
+model Membership {
+  userId String
+  orgId  String
+  role   Role     @default(MEMBER)
+  joinedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  org  Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  @@id([userId, orgId])
+}
+
+model Project {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  photo       String?
+  createdAt   DateTime @default(now())
+
+  orgId String
+  org   Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  memberships ProjectMembership[]
+  tasks       Task[]
+}
+
+model ProjectMembership {
+  userId    String
+  projectId String
+  role      ProjectRole @default(MEMBER)
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@id([userId, projectId])
+}
+
+model Task {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  status      TaskStatus @default(TODO)
+  createdAt   DateTime @default(now())
+
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  assignments TaskAssignment[]
+}
+
+model TaskAssignment {
+  taskId String
+  userId String
+  role   TaskRole @default(ASSIGNEE)
+  assignedAt DateTime @default(now())
+
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([taskId, userId])
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+enum ProjectRole {
+  ADMIN
+  MEMBER
+  VIEWER
+}
+
+enum TaskRole {
+  ASSIGNEE
+  REVIEWER
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
 }
