@@ -1,14 +1,8 @@
 import "dotenv/config";
-import express, { type Request, type Response } from "express";
+import express, { Express, type Request, type Response } from "express";
 
-const app = express();
+export const app: Express = express();
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello world");
-});
-
-app.listen(3000, (err) => {
-  if (err) {
-    console.log(err);
-  }
 });
