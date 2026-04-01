@@ -1,0 +1,5 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": ["*"], // Matches all .ts files in backend/src
+  "exclude": ["dist"]
+}
