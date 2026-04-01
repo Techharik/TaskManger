@@ -1,9 +1,8 @@
 import { app } from "./index";
-import config from "./config/config";
+import config from "./shared/config/config";
 
 async function StartServer() {
   try {
-    // await initalizeApp();
     app.listen(config.PORT, (e?: Error) => {
       if (e) {
         throw new Error(`Server not started: ${e?.message}`);
