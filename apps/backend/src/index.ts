@@ -9,6 +9,7 @@ import cors from "cors";
 import rateLimit from "express-rate-limit";
 import { errorHandler } from "./shared/middlewares/error";
 export const app: Express = express();
+import userRouter from "./modules/user/routes/user.route";
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -29,6 +30,8 @@ app.get("/", (req: Request, res: Response) => {
     message: "Welcome to Event Management API",
   });
 });
+
+app.use("/users", userRouter);
 
 app.get("/health", (req: Request, res: Response) => {
   res.status(200).json({

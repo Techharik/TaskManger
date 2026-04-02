@@ -5,20 +5,30 @@ import { UserImpl } from "../entities/UserEntityImpl";
 import type { UserEntity } from "../entities/UserEntity";
 
 export class userRepoImpl implements userRepo {
-  async getUserByEmail(email: string) {
+  async getUserByEmail(email: string): Promise<UserEntity | null> {
     const result = await prisma.user.findUnique({
       where: {
         email: email,
       },
     });
-    return result;
+    return result
+      ? new UserImpl(
+          result?.id.toString(),
+          result?.name,
+          result?.email,
+          result?.password,
+        )
+      : null;
   }
-  async create(user: UserEntity): Promise<UserEntity> {
+  async create(data: UserEntity): Promise<UserEntity> {
     const result = await prisma.user.create({
-      name: user.name,
-      email: user.email,
-      password: user.password,
+      data: {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      },
     });
+
     return new UserImpl(result.id, result.name, result.email, result.password);
   }
 }

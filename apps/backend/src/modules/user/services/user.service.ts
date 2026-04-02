@@ -15,6 +15,15 @@ export class UserService {
     if (exists) throw new ConflictError("Email already exists");
 
     //entity;
-    const user = new UserImpl("", dto.name, dto.email, dto.password);
+    const userEnity = await UserImpl.create(
+      "",
+      dto.name,
+      dto.email,
+      dto.password,
+    );
+
+    const user = await this.repo.create(userEnity);
+
+    return user;
   };
 }
