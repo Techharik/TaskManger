@@ -10,7 +10,7 @@ const config: configTypes = {
   PORT: process.env.PORT || "3000",
   DATABASE_URL: process.env.DATABASE_URL || "",
   NODE_ENV: process.env.NODE_ENV || "development",
-  JWT_TIME: process.env.JWT_TIME,
+  JWT_TIME: process.env.JWT_TIME || "1hr",
   JWT_SECRET: "newsecret",
 };
 export default config;

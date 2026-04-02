@@ -6,7 +6,7 @@ export const createToken = (user: any) => {
   if (!config.JWT_TIME) return undefined;
 
   const options: SignOptions = {
-    expiresIn: config.JWT_TIME! as string,
+    expiresIn: "7hr",
   };
   const token = jwt.sign(
     {

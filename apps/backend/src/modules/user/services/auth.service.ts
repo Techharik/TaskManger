@@ -27,6 +27,7 @@ export class authService {
     const token = createToken(exists);
     return {
       token,
+      exists,
     };
   };
 }
