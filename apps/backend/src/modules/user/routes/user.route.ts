@@ -1,11 +1,22 @@
 import express, { Express, type IRouter } from "express";
+import { userValidateImpl } from "../validators/user.validateImpl";
+import { userRepoImpl } from "../repositories/userRepoImpl";
+import { UserService } from "../services/user.service";
+import { userController } from "../controllers/user.controller";
+import { asyncHandler } from "../../../shared/utils/asyncHandler";
 
 const router: IRouter = express.Router();
 
 // user profile create , update , delete , get
 
+const validator = new userValidateImpl();
+const repo = new userRepoImpl();
+const service = new UserService(validator, repo);
+const constroller = new userController(service);
+
 router.get("/");
-router.post("/");
+router.get("/:id");
+router.post("/", asyncHandler(constroller.create));
 router.patch("/:id");
 router.patch("/:id/password");
 router.delete("/:id");

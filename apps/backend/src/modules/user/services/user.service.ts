@@ -1,4 +1,7 @@
-import { ConflictError } from "../../../shared/utils/errorHandler";
+import {
+  ConflictError,
+  NotFoundError,
+} from "../../../shared/utils/errorHandler";
 import { UserImpl } from "../entities/UserEntityImpl";
 import type { userRepo } from "../repositories/userRepo";
 import type { IuserValidator } from "../validators/user.validator";
@@ -14,7 +17,6 @@ export class UserService {
 
     if (exists) throw new ConflictError("Email already exists");
 
-    //entity;
     const userEnity = await UserImpl.create(
       "",
       dto.name,
@@ -25,5 +27,11 @@ export class UserService {
     const user = await this.repo.create(userEnity);
 
     return user;
+  };
+  getUser = async (id: string) => {
+    const exists = await this.repo.getUserById(id);
+
+    if (!exists) throw new NotFoundError("user not found");
+    return exists;
   };
 }

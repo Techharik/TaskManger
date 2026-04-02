@@ -8,7 +8,6 @@ import type { IuserValidator } from "./user.validator";
 import { ValidationError } from "../../../shared/utils/errorHandler";
 
 export class userValidateImpl implements IuserValidator {
-  constructor() {}
   validateRegister(user: any): registerDto {
     const result = registerSchema.safeParse(user);
 

@@ -1,4 +1,3 @@
-import type { registerDto } from "@repo/types";
 import type { userRepo } from "./userRepo";
 import { prisma } from "../../../shared/db/prisma";
 import { UserImpl } from "../entities/UserEntityImpl";
@@ -30,5 +29,20 @@ export class userRepoImpl implements userRepo {
     });
 
     return new UserImpl(result.id, result.name, result.email, result.password);
+  }
+  async getUserById(id: string): Promise<UserEntity | null> {
+    const result = await prisma.user.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    return result
+      ? new UserImpl(
+          result?.id.toString(),
+          result?.name,
+          result?.email,
+          result?.password,
+        )
+      : null;
   }
 }
