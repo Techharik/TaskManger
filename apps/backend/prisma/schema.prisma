@@ -1,9 +1,9 @@
 // prisma/schema.prisma
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../generated/prisma"
 }
-
 datasource db {
   provider = "postgresql"
 }
@@ -14,47 +14,21 @@ model User {
   email     String   @unique
   password  String
   photo     String?
-  about     String? 
+  about     String?
   createdAt DateTime @default(now())
 
-  memberships        Membership[]
   projectMemberships ProjectMembership[]
   taskAssignments    TaskAssignment[]
-}
-
-model Organization {
-  id          String   @id @default(uuid())
-  name        String
-  description String?
-  photo       String?
-  createdAt   DateTime @default(now())
-
-  memberships Membership[]
-  projects    Project[]
-}
-
-model Membership {
-  userId String
-  orgId  String
-  role   Role     @default(MEMBER)
-  joinedAt DateTime @default(now())
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  org  Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
-
-  @@id([userId, orgId])
+  taskComments       TaskComment[]
+  taskAttachments    TaskAttachment[]
 }
 
 model Project {
-  id          String   @id @default(uuid())
+  id          String              @id @default(uuid())
   name        String
   description String?
   photo       String?
-  createdAt   DateTime @default(now())
-
-  orgId String
-  org   Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
-
+  createdAt   DateTime            @default(now())
   memberships ProjectMembership[]
   tasks       Task[]
 }
@@ -71,28 +45,56 @@ model ProjectMembership {
 }
 
 model Task {
-  id          String   @id @default(uuid())
+  id          String     @id @default(uuid())
   title       String
   description String?
   status      TaskStatus @default(TODO)
-  createdAt   DateTime @default(now())
+  createdAt   DateTime   @default(now())
 
   projectId String
   project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
   assignments TaskAssignment[]
+  comments    TaskComment[]
+  attachments TaskAttachment[]
 }
 
 model TaskAssignment {
-  taskId String
-  userId String
-  role   TaskRole @default(ASSIGNEE)
+  taskId     String
+  userId     String
+  role       TaskRole @default(ASSIGNEE)
   assignedAt DateTime @default(now())
 
   task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([taskId, userId])
+}
+
+model TaskComment {
+  id        String   @id @default(uuid())
+  content   String
+  createdAt DateTime @default(now())
+
+  taskId String
+  userId String
+
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model TaskAttachment {
+  id        String   @id @default(uuid())
+  fileUrl   String
+  fileName  String
+  fileType  String?
+  createdAt DateTime @default(now())
+
+  taskId String
+  userId String
+
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum Role {
