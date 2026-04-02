@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, RequestHandler } from "express";
 import { AppError } from "./errorHandler";
 import { logger } from "../middlewares/logger";
 
@@ -9,10 +9,16 @@ type AsyncHandler = (
 ) => Promise<any>;
 
 export const asyncHandler =
-  (fn: AsyncHandler) =>
-  async (req: Request, res: Response, next: NextFunction) => {
+  <P = any, ResBody = any, ReqBody = any, ReqQuery = any>(
+    fn: (
+      req: Request<P, ResBody, ReqBody, ReqQuery>,
+      res: Response,
+      next: NextFunction,
+    ) => Promise<any>,
+  ): RequestHandler =>
+  async (req, res, next) => {
     try {
-      await fn(req, res, next);
+      await fn(req as any, res, next);
     } catch (err: any) {
       console.log("Error caught:", err);
 
@@ -31,6 +37,7 @@ export const asyncHandler =
           message: "Invalid JSON payload",
         });
       }
+
       next(err);
     }
   };

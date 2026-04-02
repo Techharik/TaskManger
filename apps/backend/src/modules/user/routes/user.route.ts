@@ -12,11 +12,11 @@ const router: IRouter = express.Router();
 const validator = new userValidateImpl();
 const repo = new userRepoImpl();
 const service = new UserService(validator, repo);
-const constroller = new userController(service);
+const controller = new userController(service);
 
 router.get("/");
-router.get("/:id");
-router.post("/", asyncHandler(constroller.create));
+router.get("/:id", asyncHandler(controller.getUserInfo));
+router.post("/", asyncHandler(controller.create));
 router.patch("/:id");
 router.patch("/:id/password");
 router.delete("/:id");
