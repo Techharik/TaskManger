@@ -32,7 +32,7 @@ export class userController {
     const id = req.user?.id;
     const data = req.body;
     if (!id) throw new NotFoundError("Try login again , user id not found");
-    const result = await this.userService.updateUser(id, body);
+    const result = await this.userService.updateUser(id, data);
 
     return res.status(200).json({ status: "success", data: result });
   };

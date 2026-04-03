@@ -38,6 +38,18 @@ export class UserService {
     return exists;
   };
 
+  updateUser = async (id: string, data: any) => {
+    //validate the data
+    const dto = this.validator.validateUpdate(data);
+    const user = await this.repo.getUserById(id);
+    if (!user) {
+      throw new NotFoundError("user not found");
+    }
+
+    const result = await this.repo.updateUser(id, dto);
+    return result;
+  };
+
   deleteUser = async (id: string) => {
     if (!id) {
       throw new ValidationError("Id is not provided");

@@ -5,5 +5,6 @@ export interface UserEntity {
   name: string;
   email: string;
   password: string;
+  about: string;
   verifyPassword: (candidate: string) => Promise<boolean>;
 }
