@@ -1,6 +1,7 @@
 import {
   ConflictError,
   NotFoundError,
+  ValidationError,
 } from "../../../shared/utils/errorHandler";
 import { UserImpl } from "../entities/UserEntityImpl";
 import type { userRepo } from "../repositories/userRepo";
@@ -35,5 +36,19 @@ export class UserService {
     // hide password
     exists.password = "";
     return exists;
+  };
+
+  deleteUser = async (id: string) => {
+    if (!id) {
+      throw new ValidationError("Id is not provided");
+    }
+
+    const exists = await this.repo.getUserById(id);
+    if (!exists) {
+      throw new NotFoundError("User not found");
+    }
+
+    const result = this.repo.deleteUser(id);
+    return result;
   };
 }

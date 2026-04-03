@@ -45,4 +45,12 @@ export class userRepoImpl implements userRepo {
         )
       : null;
   }
+  async deleteUser(id: string): Promise<Boolean> {
+    const result = await prisma.user.delete({
+      where: {
+        id: id,
+      },
+    });
+    return result ? true : false;
+  }
 }

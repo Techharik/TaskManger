@@ -22,6 +22,6 @@ router.get("/:id", asyncHandler(controller.getUserInfo));
 router.post("/", asyncHandler(controller.create));
 // router.patch("/:id");
 // router.patch("/:id/password");
-// router.delete("/:id");
+router.delete("/:id", asyncHandler(controller.deleteUser));
 
 export default router;
