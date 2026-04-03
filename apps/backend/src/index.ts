@@ -31,7 +31,7 @@ app.get("/", (req: Request, res: Response) => {
   });
 });
 
-app.use("/users", userRouter);
+app.use("/api/v1/users", userRouter);
 
 app.get("/health", (req: Request, res: Response) => {
   res.status(200).json({

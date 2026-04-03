@@ -14,11 +14,11 @@ const repo = new userRepoImpl();
 const service = new UserService(validator, repo);
 const controller = new userController(service);
 
-router.get("/");
+// router.get("/");
 router.get("/:id", asyncHandler(controller.getUserInfo));
 router.post("/", asyncHandler(controller.create));
-router.patch("/:id");
-router.patch("/:id/password");
-router.delete("/:id");
+// router.patch("/:id");
+// router.patch("/:id/password");
+// router.delete("/:id");
 
 export default router;

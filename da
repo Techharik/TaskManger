@@ -1,0 +1,113 @@
+[33mcommit 502b668691f552ea1e7cb092be1dd504452eceae[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Techharik <khariprasath30@gmail.com>
+Date:   Thu Apr 2 17:17:08 2026 +0530
+
+    feat: user module
+
+[33mcommit 305c544614d77456eceff8c93cba4ee7a375b3a4[m
+Author: Techharik <khariprasath30@gmail.com>
+Date:   Thu Apr 2 17:08:11 2026 +0530
+
+    feat: user module
+
+[33mcommit a6f0b06d15f048188d703ac2546aeb5217cc65a1[m
+Author: Techharik <khariprasath30@gmail.com>
+Date:   Thu Apr 2 16:25:49 2026 +0530
+
+    feat: login with auth module is added
+
+[33mcommit 91e2a315e56d911113f6d3cfe8e06ac73928be71[m
+Author: Techharik <khariprasath30@gmail.com>
+Date:   Thu Apr 2 16:20:31 2026 +0530
+
+    feat: user module with auth
+
+[33mcommit fa4753b8449dba347fbd2821785a765fda45efbe[m
+Author: Techharik <khariprasath30@gmail.com>
+Date:   Thu Apr 2 15:39:19 2026 +0530
+
+    feat: user module with types
+
+[33mcommit 6745f634e592104be7ea46564596fa00ae146ac0[m
+Author: Techharik <khariprasath30@gmail.com>
+Date:   Wed Apr 1 20:09:52 2026 +0530
+
+    feat: added with readme
+
+[33mcommit 37bf4ba172c705ab97d0510658a62e3e4274e984[m
+Author: Techharik <khariprasath30@gmail.com>
+Date:   Wed Apr 1 19:22:37 2026 +0530
+
+    feat: base setup
+
+[33mcommit b73f0b177f3bd4da6ce6d2576c40bf9176bd7930[m
+Author: Techharik <khariprasath30@gmail.com>
+Date:   Wed Apr 1 17:54:04 2026 +0530
+
+    feat: utils/ error handler , logger
+
+[33mcommit 6a9e63d00179acf3f9eaefac5edde32749f70487[m
+Author: Techharik <khariprasath30@gmail.com>
+Date:   Wed Apr 1 17:45:51 2026 +0530
+
+    feat: Package folder added
+
+[33mcommit 00d5ac808a65b654d2a911733005026a97708325[m
+Author: Techharik <khariprasath30@gmail.com>
+Date:   Wed Apr 1 17:43:57 2026 +0530
+
+    feat: schema add for the project
+
+[33mcommit b0098619d216eb637dc48865b48072c69c531e44[m
+Author: Techharik <khariprasath30@gmail.com>
+Date:   Wed Apr 1 17:18:44 2026 +0530
+
+    feat: add prisma client to the project
+
+[33mcommit 37470625b25a8f5c8b2645209c2dffd1118e7e7f[m
+Author: Techharik <khariprasath30@gmail.com>
+Date:   Wed Apr 1 16:29:52 2026 +0530
+
+    feat: DDD level arch
+
+[33mcommit f102cd866afc3fa0a4fa748af2a40908c20866b1[m
+Author: Techharik <khariprasath30@gmail.com>
+Date:   Wed Apr 1 16:29:06 2026 +0530
+
+    feat: DDD level arch
+
+[33mcommit 70f8954de1647f3d30cb775d16434c3dec398aa1[m
+Author: Techharik <khariprasath30@gmail.com>
+Date:   Wed Apr 1 12:30:38 2026 +0530
+
+    feat: Basic setup done
+
+[33mcommit a70f73a2fd7aa15748316781f69f34531cbf72cf[m
+Author: Techharik <khariprasath30@gmail.com>
+Date:   Wed Apr 1 12:28:41 2026 +0530
+
+    feat: Env and basic types added
+
+[33mcommit c6b68fc939232334307327d28b0ef2c147f6283f[m
+Author: Techharik <khariprasath30@gmail.com>
+Date:   Wed Apr 1 12:26:32 2026 +0530
+
+    feat: Env and basic types added
+
+[33mcommit 50fae622c6fa0fb499448081cf1db6697f83cb04[m
+Author: hariprasath <khariprasath30@gmail.com>
+Date:   Wed Apr 1 12:23:09 2026 +0530
+
+    feat: Env and basic types added
+
+[33mcommit ef79feef111e256b8e800a6ae58d97acdd058e85[m
+Author: hariprasath <khariprasath30@gmail.com>
+Date:   Wed Apr 1 12:10:34 2026 +0530
+
+    feat: express setup
+
+[33mcommit 7b287ca8f5008f3ec6bb51e8966eb135b18287aa[m
+Author: hariprasath <khariprasath30@gmail.com>
+Date:   Wed Apr 1 11:46:11 2026 +0530
+
+    feet: inital setup with monorepo
