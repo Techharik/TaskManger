@@ -18,10 +18,10 @@ const controller = new userController(service);
 const authSer = new authService(validator, repo);
 const authcontrol = new authController(authSer);
 router.get("/login", asyncHandler(authcontrol.login));
-router.get("/:id", asyncHandler(controller.getUserInfo));
+router.get("/me", asyncHandler(controller.getUserInfo));
 router.post("/", asyncHandler(controller.create));
-// router.patch("/:id");
+router.patch("/me", asyncHandler(controller.updateUser));
 // router.patch("/:id/password");
-router.delete("/:id", asyncHandler(controller.deleteUser));
+router.delete("/", asyncHandler(controller.deleteUser));
 
 export default router;

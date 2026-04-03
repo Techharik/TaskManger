@@ -8,3 +8,8 @@ export const loginSchema = z.object({
     email: z.email("Invalid Email Address"),
     password: z.string().min(6, "Password must be at least 6 chacracters"),
 });
+export const updateShema = z.object({
+    name: z.string().min(3, "Name is required").optional(),
+    email: z.email("Invalida email address").optional(),
+    about: z.string().min(10, "minium 5 chars").optional(),
+});
