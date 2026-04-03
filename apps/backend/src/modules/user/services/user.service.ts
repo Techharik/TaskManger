@@ -32,6 +32,8 @@ export class UserService {
     const exists = await this.repo.getUserById(id);
 
     if (!exists) throw new NotFoundError("user not found");
+    // hide password
+    exists.password = "";
     return exists;
   };
 }

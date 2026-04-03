@@ -7,10 +7,11 @@ export class userController {
 
   create = async (req: Request, res: Response) => {
     const result = await this.userService.register(req.body);
-    res.status(201).json({ status: "success", data: result });
+    return res.status(201).json({ status: "success", data: result });
   };
   getUserInfo = async (req: Request<{ id: string }>, res: Response) => {
     const id = req.params?.id;
     const result = await this.userService.getUser(id);
+    return res.status(200).json({ status: "success", data: result });
   };
 }

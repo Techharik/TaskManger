@@ -1,0 +1,2 @@
+{"code":400,"level":"error","message":"Password must be at least 6 chacracters","service":"event-service"}
+{"code":400,"level":"error","message":"Password mismatch, Enter the correct the password","service":"event-service"}
