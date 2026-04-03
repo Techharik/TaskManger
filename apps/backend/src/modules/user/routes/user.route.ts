@@ -6,6 +6,7 @@ import { userController } from "../controllers/user.controller";
 import { asyncHandler } from "../../../shared/utils/asyncHandler";
 import { authController } from "../controllers/auth.controller";
 import { authService } from "../services/auth.service";
+import { authMiddleware } from "../../../shared/middlewares/auth";
 
 const router: IRouter = express.Router();
 
@@ -17,11 +18,12 @@ const service = new UserService(validator, repo);
 const controller = new userController(service);
 const authSer = new authService(validator, repo);
 const authcontrol = new authController(authSer);
+
 router.get("/login", asyncHandler(authcontrol.login));
-router.get("/me", asyncHandler(controller.getUserInfo));
+router.get("/me", authMiddleware, asyncHandler(controller.getUserInfo));
 router.post("/", asyncHandler(controller.create));
-router.patch("/me", asyncHandler(controller.updateUser));
+router.patch("/me", authMiddleware, asyncHandler(controller.updateUser));
 // router.patch("/:id/password");
-router.delete("/", asyncHandler(controller.deleteUser));
+router.delete("/", authMiddleware, asyncHandler(controller.deleteUser));
 
 export default router;

@@ -1,3 +1,8 @@
 {"code":400,"level":"error","message":"Password must be at least 6 chacracters","service":"event-service"}
 {"code":400,"level":"error","message":"Password mismatch, Enter the correct the password","service":"event-service"}
 {"code":404,"level":"error","message":"user not found","service":"event-service"}
+{"code":404,"level":"error","message":"Try login again , user id not found","service":"event-service"}
+{"code":404,"level":"error","message":"Try login again , user id not found","service":"event-service"}
+{"code":404,"level":"error","message":"Try login again , user id not found","service":"event-service"}
+{"code":409,"level":"error","message":"Email already exists","service":"event-service"}
+{"code":409,"level":"error","message":"Email already exists","service":"event-service"}

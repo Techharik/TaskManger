@@ -23,6 +23,7 @@ export class UserService {
       dto.name,
       dto.email,
       dto.password,
+      dto.about ?? ""
     );
 
     const user = await this.repo.create(userEnity);

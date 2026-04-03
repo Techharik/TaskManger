@@ -20,16 +20,24 @@ export class userRepoImpl implements userRepo {
         )
       : null;
   }
+
   async create(data: UserEntity): Promise<UserEntity> {
     const result = await prisma.user.create({
       data: {
         name: data.name,
         email: data.email,
         password: data.password,
+        about: data.about ?? "",
       },
     });
-
-    return new UserImpl(result.id, result.name, result.email, result.password);
+    console.log(result);
+    return new UserImpl(
+      result.id,
+      result.name,
+      result.email,
+      result.password,
+      result.about ?? "",
+    );
   }
   async getUserById(id: string): Promise<UserEntity | null> {
     const result = await prisma.user.findUnique({
@@ -43,6 +51,7 @@ export class userRepoImpl implements userRepo {
           result?.name,
           result?.email,
           result?.password,
+          result.about ?? "",
         )
       : null;
   }
@@ -54,20 +63,23 @@ export class userRepoImpl implements userRepo {
     if (data.email) updates.email = data.email;
     if (data.about) updates.about = data.about;
 
-   
-  const updated = await prisma.user.update({
-    where: {
-      id: id,
-    },
-    data: updates,
-  });
-    
+    const updated = await prisma.user.update({
+      where: {
+        id: id,
+      },
+      data: updates,
+    });
+
     if (!updated) {
       throw new NotFoundError("Event not found");
     }
 
     return new UserImpl(
-      updated.id,updated.name,updated.email,""
+      updated.id,
+      updated.name,
+      updated.email,
+      updated.password,
+      updated.about ?? "",
     );
   }
   async deleteUser(id: string): Promise<Boolean> {
