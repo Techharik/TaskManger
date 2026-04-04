@@ -1,10 +1,10 @@
-import type { userRepo } from "./userRepo";
+import type { IUserRepo } from "./userRepo";
 import { prisma } from "../../../shared/db/prisma";
 import { UserImpl } from "../entities/UserEntityImpl";
 import type { UserEntity } from "../entities/UserEntity";
 import { NotFoundError } from "../../../shared/utils/errorHandler";
 
-export class userRepoImpl implements userRepo {
+export class userRepoImpl implements IUserRepo {
   async getUserByEmail(email: string): Promise<UserEntity | null> {
     const result = await prisma.user.findUnique({
       where: {

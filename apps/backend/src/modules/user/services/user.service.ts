@@ -4,13 +4,13 @@ import {
   ValidationError,
 } from "../../../shared/utils/errorHandler";
 import { UserImpl } from "../entities/UserEntityImpl";
-import type { userRepo } from "../repositories/userRepo";
+import type { IUserRepo } from "../repositories/userRepo";
 import type { IuserValidator } from "../validators/user.validator";
 
 export class UserService {
   constructor(
     private validator: IuserValidator,
-    private repo: userRepo,
+    private repo: IUserRepo,
   ) {}
   register = async (data: any) => {
     const dto = this.validator.validateRegister(data);
@@ -23,7 +23,7 @@ export class UserService {
       dto.name,
       dto.email,
       dto.password,
-      dto.about ?? ""
+      dto.about ?? "",
     );
 
     const user = await this.repo.create(userEnity);
