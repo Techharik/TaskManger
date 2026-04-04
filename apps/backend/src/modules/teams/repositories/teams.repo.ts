@@ -17,6 +17,6 @@ export interface IteamsRepository {
     role: ProjectRole,
     requesterId: string,
   ): Promise<teamsEntityImpl>;
-  removeMember(projectId: string, userId: string): Promise<void>;
+  removeMember(projectId: string, userId: string): Promise<any>;
   getTasks(projectId: string): Promise<any>;
 }

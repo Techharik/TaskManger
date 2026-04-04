@@ -7,8 +7,6 @@ import type { IteamsRepository } from "./teams.repo";
 
 export class teamsRepositoryImpl implements IteamsRepository {
   async createTeam(data: any, userId: string) {
-    console.log("prisma", data, userId);
-
     const project = await prisma.project.create({
       data: {
         name: data.name,
@@ -34,6 +32,7 @@ export class teamsRepositoryImpl implements IteamsRepository {
   }
 
   async findUserTeams(userId: string) {
+    // console.log(userId);
     const projects = await prisma.project.findMany({
       where: {
         memberships: { some: { userId } },
@@ -44,7 +43,7 @@ export class teamsRepositoryImpl implements IteamsRepository {
         },
       },
     });
-
+    // console.log(projects);
     return projects.map((p) => new teamsEntityImpl(p, p.memberships[0]));
   }
 
@@ -104,12 +103,12 @@ export class teamsRepositoryImpl implements IteamsRepository {
         role,
       },
     });
-
-    return this.findById(projectId, requesterId) as any;
+    // return result;
+    return this.findById(projectId, userId) as any;
   }
 
   async removeMember(projectId: string, userId: string) {
-    await prisma.projectMembership.delete({
+    const result = await prisma.projectMembership.delete({
       where: {
         userId_projectId: {
           userId,
@@ -117,6 +116,7 @@ export class teamsRepositoryImpl implements IteamsRepository {
         },
       },
     });
+    return result;
   }
 
   getTasks(projectId: string) {

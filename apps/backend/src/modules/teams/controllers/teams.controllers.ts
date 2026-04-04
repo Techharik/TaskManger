@@ -61,21 +61,21 @@ export class teamsController {
     if (!id) {
       throw new ValidationError("ID is not found, please login again");
     }
-    const result = await this.teamsService.addMember(
-      req.params.id,
-      req.body,
-      id,
-    );
+    const result = await this.teamsService.addMember(paramsid, req.body, id);
     return res.status(200).json({ status: "success", data: result });
   };
 
-  removeMember = async (req: Request<{ id: string }>, res: Response) => {
+  removeMember = async (
+    req: Request<{ id: string; userId: string }>,
+    res: Response,
+  ) => {
+    const project_id = req.params.id;
+    const paramsid = req.params.userId;
     const id = req.user?.id;
-    const paramsid = req.params.id;
-    if (!id) {
+    if (!project_id || !id) {
       throw new ValidationError("ID is not found, please login again");
     }
-    await this.teamsService.removeMember(req.params.id, paramsid, id);
+    await this.teamsService.removeMember(project_id, paramsid, id);
     return res.status(200).json({ status: "success" });
   };
 

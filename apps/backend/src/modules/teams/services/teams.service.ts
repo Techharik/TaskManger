@@ -54,7 +54,7 @@ export class teamsService {
 
   async addMember(projectId: string, payload: unknown, userId: string) {
     const dto = this.validator.validateAddMember(payload);
-
+    console.log(dto);
     const team = await this.repo.findById(projectId, userId);
     if (!team) throw new Error("Project not found");
 
