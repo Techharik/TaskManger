@@ -1,23 +1,33 @@
 // modules/team/repositories/teams.repository.ts
 
-import type { ProjectRole } from "../../../../generated/prisma/enums";
+import { ProjectRole } from "../../../../generated/prisma/enums";
 import { prisma } from "../../../shared/db/prisma";
 import { teamsEntityImpl } from "../entities/teamEntityImpl";
 import type { IteamsRepository } from "./teams.repo";
 
 export class teamsRepositoryImpl implements IteamsRepository {
   async createTeam(data: any, userId: string) {
+    console.log("prisma", data, userId);
+
     const project = await prisma.project.create({
       data: {
-        ...data,
+        name: data.name,
+        description: data.description,
+        photo: data.photo,
         memberships: {
-          create: {
-            userId,
-            role: "ADMIN",
-          },
+          create: [
+            {
+              user: {
+                connect: { id: userId },
+              },
+              role: ProjectRole.ADMIN,
+            },
+          ],
         },
       },
-      include: { memberships: true },
+      include: {
+        memberships: true,
+      },
     });
 
     return new teamsEntityImpl(project, project.memberships[0]);

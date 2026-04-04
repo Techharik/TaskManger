@@ -12,6 +12,8 @@ export class teamsService {
 
   async create(payload: unknown, userId: string) {
     const dto = this.validator.validateCreate(payload);
+    console.log(dto);
+
     const team = await this.repo.createTeam(dto, userId);
     return team.toJSON();
   }
