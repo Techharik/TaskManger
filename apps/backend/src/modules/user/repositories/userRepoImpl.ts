@@ -82,6 +82,7 @@ export class userRepoImpl implements userRepo {
       updated.about ?? "",
     );
   }
+
   async deleteUser(id: string): Promise<Boolean> {
     const result = await prisma.user.delete({
       where: {
