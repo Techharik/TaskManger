@@ -9,7 +9,8 @@ export class taskService {
 
   async create(payload: unknown, userId: string) {
     const dto = this.validator.validateCreate(payload);
-    return (await this.repo.create(dto)).task;
+    const task = await this.repo.create(dto);
+    return task.toJSON();
   }
 
   async getById(taskId: string, userId: string) {

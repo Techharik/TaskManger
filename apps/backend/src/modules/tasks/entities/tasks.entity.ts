@@ -25,4 +25,13 @@ export class taskEntityImpl {
       throw new Error("Cannot change completed task");
     }
   }
+  toJSON() {
+    return {
+      id: this.task.id,
+      title: this.task.title,
+      description: this.task.description,
+      status: this.task.status,
+      projectId: this.task.projectId,
+    };
+  }
 }
