@@ -8,13 +8,17 @@ import { taskController } from "../controllers/tasks.controller";
 import { taskService } from "../services/tasks.services";
 import { taskRepositoryImpl } from "../repositories/tasks.repo";
 import { taskValidatorImpl } from "../validators/tasks.validatorsImpl";
+import { notificationService } from "../../notifications/services/notifications.services";
+import { notificationRepositoryImpl } from "../../notifications/repositories/notifications.repo";
 
 const router = Router();
 
 // DI
 const repo = new taskRepositoryImpl();
 const validator = new taskValidatorImpl();
-const service = new taskService(repo, validator);
+const repoNotific = new notificationRepositoryImpl();
+const notification = new notificationService(repoNotific);
+const service = new taskService(repo, validator, notification);
 const controller = new taskController(service);
 
 // auth

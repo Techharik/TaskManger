@@ -8,13 +8,19 @@ import express, {
 import cors from "cors";
 import rateLimit from "express-rate-limit";
 import { errorHandler } from "./shared/middlewares/error";
-export const app: Express = express();
-import userRouter from "./modules/users/routes/user.route";
-import teamsRouter from "./modules/teams/routes/teams.route";
+
 import http from "http";
 import { setupWebSocket } from "./shared/ws/notifications.gateway";
 
-const server = http.createServer(app);
+export const app: Express = express();
+import userRouter from "./modules/users/routes/user.route";
+import teamsRouter from "./modules/teams/routes/teams.route";
+import tasksRouter from "./modules/tasks/routes/tasks.route";
+import commentsRouter from "./modules/comments/routes/comments.route";
+import attachmentsRouter from "./modules/attachments/routes/attachments.route";
+import notificationsRouter from "./modules/notifications/routes/notifications.routes";
+
+export const server = http.createServer(app);
 setupWebSocket(server);
 
 const limiter = rateLimit({
@@ -39,6 +45,10 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/teams", teamsRouter);
+app.use("/api/v1/tasks", tasksRouter);
+app.use("/api/v1/comments", commentsRouter);
+app.use("/api/v1/attachments", attachmentsRouter);
+app.use("/api/v1/notifications", notificationsRouter);
 
 app.get("/health", (req: Request, res: Response) => {
   res.status(200).json({
