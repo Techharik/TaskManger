@@ -1,3 +1,4 @@
+import type { notificationService } from "../../notifications/services/notifications.services";
 import type { ItaskRepository } from "../repositories/tasks.repo";
 import type { ItaskValidator } from "../validators/tasks.validatorsImpl";
 
@@ -5,6 +6,7 @@ export class taskService {
   constructor(
     private repo: ItaskRepository,
     private validator: ItaskValidator,
+    private notificationService: notificationService,
   ) {}
 
   async create(payload: unknown, userId: string) {
@@ -62,7 +64,14 @@ export class taskService {
 
     task.ensureCanModify();
 
-    return this.repo.assign(taskId, dto.userId, userId);
+    const result = this.repo.assign(taskId, dto.userId, userId);
+
+    await this.notificationService.create(dto.userId, {
+      type: "TASK_ASSIGNED",
+      message: "You were assigned a task",
+      entityId: taskId,
+    });
+    return result;
   }
 
   async getMyTasks(userId: string) {

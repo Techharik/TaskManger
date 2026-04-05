@@ -11,6 +11,11 @@ import { errorHandler } from "./shared/middlewares/error";
 export const app: Express = express();
 import userRouter from "./modules/users/routes/user.route";
 import teamsRouter from "./modules/teams/routes/teams.route";
+import http from "http";
+import { setupWebSocket } from "./shared/ws/notifications.gateway";
+
+const server = http.createServer(app);
+setupWebSocket(server);
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
