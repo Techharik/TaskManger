@@ -6,13 +6,15 @@ import { attachmentService } from "../services/attachments.service";
 import { authMiddleware } from "../../../shared/middlewares/auth";
 import { attachmentRepositoryImpl } from "../repositories/attachments.repo";
 import { asyncHandler } from "../../../shared/utils/asyncHandler";
+import { attachmentValidatorImpl } from "../validators/atatchment.validator";
 
 const router = Router();
 const upload = multer();
 
 const repo = new attachmentRepositoryImpl();
 const storage = new localStorageProvider();
-const service = new attachmentService(repo, storage);
+const validator = new attachmentValidatorImpl();
+const service = new attachmentService(repo, storage, validator);
 const controller = new attachmentController(service);
 
 router.use(authMiddleware);
