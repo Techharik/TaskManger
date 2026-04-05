@@ -9,7 +9,7 @@ import cors from "cors";
 import rateLimit from "express-rate-limit";
 import { errorHandler } from "./shared/middlewares/error";
 export const app: Express = express();
-import userRouter from "./modules/user/routes/user.route";
+import userRouter from "./modules/users/routes/user.route";
 import teamsRouter from "./modules/teams/routes/teams.route";
 
 const limiter = rateLimit({
